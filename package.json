@@ -1,0 +1,29 @@
+{
+  "name": "muninn",
+  "version": "1.0.0",
+  "description": "Front-end JS error logger. Grabs up window errors and sends them away",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aric87/muninn.git"
+  },
+  "keywords": [],
+  "author": "Aric Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aric87/muninn/issues"
+  },
+  "homepage": "https://github.com/aric87/muninn#readme",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "superagent": "^2.2.0"
+  }
+}
