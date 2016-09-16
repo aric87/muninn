@@ -1,7 +1,7 @@
 import request from 'superagent';
 
 // require the user to call the init function, and pass in an email. That way, different sites can send to different emails.
-window.initErrorLogger = function ErrorLogger(recipientEmailAddress){
+window.Muninn = function ErrorLogger(recipientEmailAddress){
 // actual email function
   const url = 'http://emailservice-memsearch.rhcloud.com/email';
   const browserData = {
@@ -10,7 +10,7 @@ window.initErrorLogger = function ErrorLogger(recipientEmailAddress){
     host: window.location.hostname,
     cameFrom: document.referrer
   }
-  return function sendItAway(errorText){
+  function sendItAway(errorText){
       //function sends the error
       let formattedErrorText = `Here's the error details:\n
       browser: ${browserData.browser} \n
@@ -53,8 +53,22 @@ window.initErrorLogger = function ErrorLogger(recipientEmailAddress){
 
 
 // capture window errors
-// callable function for users to initiate their own error reporting
+window.onerror = function(errorMsg, url, lineNo, columnNo, errorObj) {
+  console.log('calling error')
+  let message = 'Here\'s the error message:\n';
+  if(url) message+= `The error occured in ${url} \n`
+  if(lineNo) message+= `It occured on line ${lineNo} \n`
+  if(columnNo) message+= `It occured in col ${columnNo} \n`
+  message+= `${errorMsg} \n`;
+  message+= `Stack Trace: ${errorObj.stack}`;
 
+  sendItAway(message);
+};
+// TODO: catch resource errors
 // return important pieces into the window
-
+// wrap emaail function so its not exposed to the window
+function userManualLogger(text){
+  sendItAway(text)
+}
+return userManualLogger;
 }
