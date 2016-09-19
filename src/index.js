@@ -1,6 +1,7 @@
 import request from 'superagent';
 
 // require the user to call the init function, and pass in an email. That way, different sites can send to different emails.
+
 window.Muninn = function ErrorLogger(recipientEmailAddress){
 // actual email function
   const url = 'http://emailservice-memsearch.rhcloud.com/email';
@@ -43,10 +44,12 @@ window.Muninn = function ErrorLogger(recipientEmailAddress){
 
       sent
       .then(function(){
-        alert('An error occured. An error report was submitted to the developer.')
+        console.log(`an error occurred, and a report was sent to the dev team.`)
       })
       .catch(function(err){
-        alert(`An error occured, but we weren\'t able to send it to the dev team. Please email ${recipientEmailAddress}, and let them know an error occured`) //TODO: add error message to this
+        console.log(`An error occured, but we weren\'t able to send it to the dev team. Please email ${recipientEmailAddress}, and let them know the following error occured: \n
+        ${err}
+        `)
       });
 
   }
