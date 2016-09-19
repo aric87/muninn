@@ -2,10 +2,10 @@ import request from 'superagent';
 
 // require the user to call the init function, and pass in an email. That way, different sites can send to different emails.
 
-window.Muninn = function ErrorLogger(recipientEmailAddress){
+window.Muninn = function ErrorLogger(recipientEmailAddress, slackOption=false){
 // actual email function
   const url = 'http://emailservice-memsearch.rhcloud.com/email';
-    // const url = 'http://localhost:8081/email';
+  // const url = 'http://localhost:8081/email';
   const browserData = {
     browser:window.navigator.userAgent,
     url:window.location.href,
@@ -25,6 +25,7 @@ window.Muninn = function ErrorLogger(recipientEmailAddress){
         'sendTo':recipientEmailAddress,
         'subject':`This is an error message from ${browserData.host}`,
         'text':formattedErrorText,
+        'slackOption':slackOption
       }
       function requestWrapper(callback){
         return request
@@ -58,7 +59,6 @@ window.Muninn = function ErrorLogger(recipientEmailAddress){
 
 // capture window errors
 window.onerror = function(errorMsg, url, lineNo, columnNo, errorObj) {
-  console.log('calling error')
   let message = 'Here\'s the error message:\n';
   if(url) message+= `The error occured in ${url} \n`
   if(lineNo) message+= `It occured on line ${lineNo} \n`
