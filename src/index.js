@@ -5,6 +5,7 @@ import request from 'superagent';
 window.Muninn = function ErrorLogger(recipientEmailAddress){
 // actual email function
   const url = 'http://emailservice-memsearch.rhcloud.com/email';
+    // const url = 'http://localhost:8081/email';
   const browserData = {
     browser:window.navigator.userAgent,
     url:window.location.href,
