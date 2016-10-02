@@ -4,7 +4,7 @@ import request from 'superagent';
 
 window.Muninn = function ErrorLogger(recipientEmailAddress, slackOption=false){
 // actual email function
-  const url = 'http://emailservice-memsearch.rhcloud.com/email';
+  const url = 'https://emailservice-memsearch.rhcloud.com/email';
   // const url = 'http://localhost:8081/email';
   const browserData = {
     browser:window.navigator.userAgent,
